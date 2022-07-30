@@ -1,0 +1,83 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block contant %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	
+</head>
+
+<body>
+
+	<!-- Start Header Area -->
+	
+	<!-- Start Banner Area -->
+	<!-- End Banner Area -->
+
+	<!--================Single Product Area =================-->
+
+	<br>
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-4">
+					<div class="s_Product_carousel">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{product.product_pic.url}}" width="400px" height="400px" alt="">
+						</div>
+						<div class="single-prd-item">
+						
+					</div>
+				</div>
+						</div>
+				<div class="col-lg-5 offset-lg-2">
+					<div class="s_product_text">
+						<h3>{{product.product_name}}</h3>
+						<h2>rs {{product.product_price}}</h2>
+						<ul class="list">
+							<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+						</ul><h5>Product discrption</h5>
+						<p>{{product.product_dis}}</p>
+						<div class="card_area d-flex align-items-center">
+							
+							
+							<br>
+							{% if cart_flag %}
+							<a class="btn btn-primary" href="{% url 'remove_to_cart' pk=product.pk %}">Remove form cart</a>	
+							 &nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;	
+
+							{% else %}
+							&nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;
+							<a class="btn btn-primary" href="{% url 'add_to_cart' pk=product.pk %}">Add to Cart</a>			
+							&nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;
+							{% endif %}
+							<br>
+							{% if wishlist_flag %}
+							<br><a class="btn btn-primary" href="{% url 'remove_to_wishlist' pk=product.pk %}">Remove to wishlist</a>
+							&nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;
+							{% else %}
+							<a class="btn btn-primary" href="{% url 'add_to_wishlist' pk=product.pk %}">Add to wishlist</a> 
+							&nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;
+							{% endif %}             
+	
+							
+						</div>
+					</div>
+
+							 &nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;	
+		<h4>product discription</h4>
+		&nbsp;	 &nbsp;	 &nbsp; &nbsp; &nbsp;<h6>{{product.product_detail}}</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
+	
+	
+</body>
+
+</html>
+{% endblock %}

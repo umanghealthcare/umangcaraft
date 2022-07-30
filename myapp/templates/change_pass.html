@@ -1,0 +1,100 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block contant %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+  
+</head>
+<body>
+                <br>
+                <br>
+                <br>
+  <!--================Login Box Area =================-->
+  <section class="login_box_area section_gap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="login_box_img">
+            <img class="img-fluid" src="{% static 'images/banner-bg.png'%}" alt="">
+            <div class="hover">
+              
+             
+             
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+          </div>
+        </div>
+        <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+        <div class="col-lg-6">
+          <div class="login_form_inner">
+            <h3>Change Password</h3>
+            <form class="row login_form" action="{% url 'change_pass' %}" method="POST" id="contactForm" novalidate="novalidate">
+              {% csrf_token %}
+              {% if msg %}
+                <b style="color: blue;">{{msg}}</b>
+              {% endif %}
+              <div class="col-md-8 form-group">
+                <input type="password" class="form-control" id="email" name="opassword" placeholder="old password" >
+                  <span id='email_error'></span><br>
+              </div>
+              <div class="col-md-8 form-group">
+                <input type="password" class="form-control" id="npassword" name="npassword" placeholder="Password" >
+              </div>
+              <div class="col-md-8 form-group">
+                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" >
+              </div>
+              
+              <div class="col-md-12 form-group">
+                <button type="submit" value="submit" class="btn btn-primary">Chnage password</button>
+                
+                <br>
+                <br>
+                <br>
+                <br>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Login Box Area =================-->
+  <script>
+          $("#email").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (!data.is_taken) {
+                  document.getElementById("email").style.border="5px solid red";
+                  document.getElementById("email_error").innerHTML="This Email ID is not register ";
+                }
+                else{
+                  document.getElementById("email").style.border="5px solid green";
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+        </script>
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block contant %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+  
+</head>
+<body>
+                <br>
+                <br>
+                <br>
+  <!--================Login Box Area =================-->
+  <section class="login_box_area section_gap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="login_box_img">
+            <img class="img-fluid" src="{% static 'images/banner-bg.png'%}" alt="">
+            <div class="hover">
+              
+             
+              <a class="primary-btn" href="{% url 'signup' %}">Create an Account</a>
+             <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+          </div>
+        </div>
+        <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+        <div class="col-lg-6">
+          <div class="login_form_inner">
+            <h3>Log in to enter</h3>
+            <form class="row login_form" action="{% url 'log' %}" method="POST" id="contactForm" novalidate="novalidate">
+              {% csrf_token %}
+              {% if msg %}
+                <b style="color: red;">{{msg}}</b>
+              {% endif %}
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email / mobile" >
+                  <span id='email_error'></span><br>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" >
+              </div>
+              
+              <div class="col-md-12 form-group">
+                <button type="submit" value="submit" class="primary-btn">Log In</button>
+                <a href="">Forgot Password?</a>
+                <br>
+                <br>
+                <br>
+                <br>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Login Box Area =================-->
+  <script>
+          $("#email").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (!data.is_taken) {
+                  document.getElementById("email").style.border="5px solid red";
+                  document.getElementById("email_error").innerHTML="This Email ID is not register ";
+                }
+                else{
+                  document.getElementById("email").style.border="5px solid green";
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+        </script>
+
+</body>
+
+</html>
+{% endblock %}
